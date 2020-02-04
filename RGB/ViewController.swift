@@ -9,7 +9,7 @@
 import UIKit
 class ViewController: UIViewController {
     
-// MARK: - IB Outlets
+    // MARK: - IB Outlets
     
     @IBOutlet weak var rgbView: UIView!
     
@@ -41,8 +41,8 @@ class ViewController: UIViewController {
         addDoneButtonTo(greenTextField)
         addDoneButtonTo(blueTextField)
         
-         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - IBActions
@@ -101,13 +101,10 @@ extension ViewController: UITextFieldDelegate {
         }
     }
     
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-    
-
     
     func dataTranmision(from textField: UITextField, to slider: UISlider) {
         guard let textInput = textField.text else { return }
@@ -143,6 +140,7 @@ extension ViewController {
                                             action: nil)
         keyboardToolbar.items = [flexBarButton, doneButton]
     }
+    
     @objc private func didTapDone() {
         self.view.endEditing(true)
     }
@@ -160,21 +158,12 @@ extension ViewController {
         present(alert, animated: true)
     }
     
-    
-    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= keyboardSize.height
             }
         }
-//        if keyboardDissmisTapGesture == nil {
-//            keyboardDissmisTapGesture = UITapGestureRecognizer(target: self,
-//                                                        action:#selector(keyboardWillShow))
-//            keyboardDissmisTapGesture?.cancelsTouchesInView = false
-////            self.view.addGestureRecognizer(keyboardDissmisTapGesture!)
-//
-//        }
     }
     func dissmisKeyboard(sender: UITapGestureRecognizer) {
         view.endEditing(true)
@@ -184,13 +173,7 @@ extension ViewController {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
-        
-//        if keyboardDissmisTapGesture != nil {
-//            self.view.addGestureRecognizer(keyboardDissmisTapGesture!)
-//            keyboardDissmisTapGesture = nil
-//        }
     }
-   
 }
 
 
